@@ -1,27 +1,68 @@
 {
-  "name": "ketsentry-server",
+  "name": "Sugam Server",
   "version": "1.0.0",
-  "main": "server.js",
+  "description": "backend server built with Express and TypeScript",
+  "main": "dist/server.js",
   "scripts": {
-    "build": "tsc",
+    "dev": "nodemon",
+    "build": "rimraf dist && tsc",
     "start": "node dist/server.js",
-    "dev": "NODE_ENV=development nodemon"
+    "start:prod": "NODE_ENV=production node dist/server.js",
+    "prestart": "npm run build",
+    "lint": "eslint 'src/**/*.ts'",
+    "format": "prettier --write 'src/**/*.ts'",
+    "type-check": "tsc --noEmit",
+    "migrate": "typeorm migration:run -d ormconfig.ts",
+    "migrate:run": "ts-node scripts/run-migrations.ts",
+    "migrate:revert": "typeorm migration:revert -d ormconfig.ts",
+    "migrate:generate": "typeorm migration:generate -d ormconfig.ts"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "@types/express": "^5.0.1",
-    "@types/morgan": "^1.9.9",
-    "@types/node": "^22.14.1",
-    "nodemon": "^3.1.9",
-    "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.8.3"
-  },
+  "keywords": [
+    "express",
+    "typescript",
+    "backend",
+    "nodejs",
+    "api",
+    "server"
+  ],
+  "author": "Aman Gupta",
+  "license": "MIT",
   "dependencies": {
+    "@scalar/api-reference": "^1.39.3",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "bcryptjs": "^3.0.3",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "morgan": "^1.10.0"
+    "ioredis": "^5.8.2",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "pg": "^8.16.3",
+    "reflect-metadata": "^0.2.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "typeorm": "^0.3.27",
+    "winston": "^3.18.3",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/ioredis": "^4.28.10",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^22.14.1",
+    "@types/pg": "^8.15.6",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
+    "@types/winston": "^2.4.4",
+    "eslint": "^9.16.0",
+    "eslint-config-prettier": "^9.1.0",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.3.3",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
